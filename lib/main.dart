@@ -40,57 +40,84 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(100),
-              color: Colors.black,
+      appBar: homeAppBar(),
+      body: ListView(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        children: [
+          SizedBox(height: 20),
+          // 상단 이미지
+          // AspectRatio
+          // 가로 / 세로
+          AspectRatio(
+            aspectRatio: 2.5 / 1,
+            child: ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(20),
+              child: Image.network(
+                'https://picsum.photos/300/200',
+                fit: BoxFit.cover,
+              ),
             ),
-            child: Icon(Icons.search, color: Colors.white),
           ),
-          SizedBox(width: 16),
+          // 제목행
+          // 큰앨범 들어가는 로우
+          // 제목행
+          // 작은앨범 들어가는 로우
         ],
+      ),
+    );
+  }
 
-        // title 속성은 안드로이드에서는 왼쪽 기본
-        // 아이폰에서는 가운데 기본
-        // centerTitle : false 을 주게되면 왼쪽으로 가지만
-        // title에 Column을 배치하면 Column 크기가 앱바 영역전체를 차지하기 때문에 무용지물
-        // 이럴땐 CrossAxisAlignment 속성으로 조정
-        // Column 과 Row 의 CrossAxisAlignment 기본값은 가운데
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "MUSIC",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-
-            Row(
-              children: [
-                Container(
-                  width: 16,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                ),
-                SizedBox(width: 3),
-                Container(
-                  width: 5,
-                  height: 5,
-                  decoration: BoxDecoration(
-                    color: Colors.grey,
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                ),
-              ],
-            ),
-          ],
+  AppBar homeAppBar() {
+    return AppBar(
+      actions: [
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(100),
+            color: Colors.black,
+          ),
+          child: Icon(Icons.search, color: Colors.white),
         ),
+        SizedBox(width: 16),
+      ],
+
+      // title 속성은 안드로이드에서는 왼쪽 기본
+      // 아이폰에서는 가운데 기본
+      // centerTitle : false 을 주게되면 왼쪽으로 가지만
+      // title에 Column을 배치하면 Column 크기가 앱바 영역전체를 차지하기 때문에 무용지물
+      // 이럴땐 CrossAxisAlignment 속성으로 조정
+      // Column 과 Row 의 CrossAxisAlignment 기본값은 가운데
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "MUSIC",
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+          ),
+
+          Row(
+            children: [
+              Container(
+                width: 16,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: Colors.black,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+              ),
+              SizedBox(width: 3),
+              Container(
+                width: 5,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: Colors.grey,
+                  borderRadius: BorderRadius.circular(100),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
