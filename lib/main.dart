@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_practice_1/big_albums.dart';
+import 'package:flutter_practice_1/rounded_image.dart';
 import 'package:flutter_practice_1/title_row.dart';
+
+// 1. 일단 Scaffold 안에서 작업
+// 2. 완성되면 위젯클래스로 분리
+// 3. 위젯클래스를 별도의 파일로 분리
+// 4. Scaffold에 위젯 배치
+// 5. 변경되어야 하는 부분들 속성으로 정의해서 수정!
 
 void main() {
   runApp(MyApp());
@@ -51,20 +59,33 @@ class HomePage extends StatelessWidget {
           // 가로 / 세로
           AspectRatio(
             aspectRatio: 2.5 / 1,
-            child: ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(20),
-              child: Image.network(
-                'https://picsum.photos/300/200',
-                fit: BoxFit.cover,
-              ),
-            ),
+            child: RoundedImage(imageUrl: "https://picsum.photos/300/200"),
           ),
           // 제목행
           TitleRow(title: "New Albums"),
-          // TODO 큰앨범 들어가는 로우
+          Row(
+            children: [
+              //
+              BigAlbums(
+                imageUrl: "https://picsum.photos/id/85/200/200",
+                title: "오늘",
+                artist: "신용재",
+              ),
+              BigAlbums(
+                imageUrl: "https://picsum.photos/id/888/200/200",
+                title: "세상에서 가장 큰 벚꽃이 피는 마을",
+                artist: "달담",
+              ),
+              BigAlbums(
+                imageUrl: "https://picsum.photos/id/423/200/200",
+                title: "뭐라할까",
+                artist: "김보경",
+              ),
+            ],
+          ),
           // 제목행
           TitleRow(title: "Song List"),
-          // TODO 작은앨범 들어가는 로우
+          //
         ],
       ),
     );
