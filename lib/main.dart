@@ -3,6 +3,7 @@ import 'package:flutter_practice_1/big_albums.dart';
 import 'package:flutter_practice_1/mini_albums.dart';
 import 'package:flutter_practice_1/rounded_image.dart';
 import 'package:flutter_practice_1/title_row.dart';
+import 'package:flutter_practice_1/extensions.dart';
 
 // 1. 일단 Scaffold 안에서 작업
 // 2. 완성되면 위젯클래스로 분리
@@ -55,6 +56,7 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20),
         children: [
           SizedBox(height: 20),
+          20.h,
           // 상단 이미지
           // AspectRatio
           // 가로 / 세로
@@ -162,3 +164,5 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+
