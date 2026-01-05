@@ -29,28 +29,9 @@ class _HomePageState extends State<HomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             if (weather != null) Temp(weather: weather!),
-            if (Speed != null) Speed(weather: weather!),
+            if (weather != null) Speed(weather: weather!),
             IconButton(
-              onPressed: () async {
-                // 1. 데이터 달라고 편지쓰기 > http 통신 GET 요청
-                Client httpClient = Client(); // http 통신을 하기위한 객체
-                Uri taget = Uri.parse(
-                  "https://api.open-meteo.com/v1/forecast?latitude=37.57&longitude=126.98&current_weather=true",
-                );
-                Response r = await httpClient.get(taget);
-                // 2. 정보가 담긴 답장 받기
-                print(r.statusCode);
-                //편지가 정상적으로 전달되고 답장을 받았는지 알려주는 숫자코드
-                print(r.body);
-                // 성공 : 200 , 실패 : 404,
-
-                // 3. 답장내용(JSON) > Map 으로 변경
-                Map<String, dynamic> jsonMap = jsonDecode(r.body);
-                // 4. Map 객체로 변경 (3 ~ 4 : 역직렬화)
-                Weather w = Weather.fromJson(jsonMap);
-                weather = w;
-                setState(() {});
-              },
+              onPressed: () async {},
               icon: Icon(Icons.refresh),
               //
             ),
