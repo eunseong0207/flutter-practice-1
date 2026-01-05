@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_practice_1/main.dart';
+import 'package:flutter_practice_1/speed.dart';
+import 'package:flutter_practice_1/temp.dart';
 import 'package:flutter_practice_1/weather.dart';
 import 'package:http/http.dart';
 
@@ -12,7 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //
-  String displayTemp = "";
+  Weather? weather;
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +28,8 @@ class _HomePageState extends State<HomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              displayTemp,
-              style: TextStyle(fontSize: 36),
-              //
-            ),
+            if (weather != null) Temp(weather: weather!),
+            if (Speed != null) Speed(weather: weather!),
             IconButton(
               onPressed: () async {
                 // 1. 데이터 달라고 편지쓰기 > http 통신 GET 요청
@@ -42,16 +40,15 @@ class _HomePageState extends State<HomePage> {
                 Response r = await httpClient.get(taget);
                 // 2. 정보가 담긴 답장 받기
                 print(r.statusCode);
-                print(r.body);
                 //편지가 정상적으로 전달되고 답장을 받았는지 알려주는 숫자코드
+                print(r.body);
                 // 성공 : 200 , 실패 : 404,
 
                 // 3. 답장내용(JSON) > Map 으로 변경
                 Map<String, dynamic> jsonMap = jsonDecode(r.body);
                 // 4. Map 객체로 변경 (3 ~ 4 : 역직렬화)
                 Weather w = Weather.fromJson(jsonMap);
-                displayTemp =
-                    "${w.currentWeather.temperature} ${w.currentWeatherUnits.temperature}";
+                weather = w;
                 setState(() {});
               },
               icon: Icon(Icons.refresh),
