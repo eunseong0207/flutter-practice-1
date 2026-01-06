@@ -43,7 +43,8 @@ class HomeViewModel extends Notifier<HomeState> {
 
   //
 }
-
+// 객체를 한번만 생성하기 위해서 사용
+// 싱글톤 패턴 -> 객체를 한번만 생성 -> 쉽게 할 수 있게 도와주는게 NotifierPrivider
 // 로직과 상태가 분리가 완료됨
 // 이제부턴 사용에 관한 내용임
 // 의존성 주입
