@@ -1,40 +1,20 @@
-/// 현재 구체적인 기상 수치를 담는 클래스
-class CurrentWeather {
-  /// 관측 시간 (ISO8601 형식)
-  final String time;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  /// 현재 기온
-  final double temperature;
+part 'current_weather.freezed.dart';
+part 'current_weather.g.dart';
 
-  /// 현재 풍속
-  final double windspeed;
+@freezed
+abstract class CurrentWeather with _$CurrentWeather {
+  const factory CurrentWeather({
+    required String time,
+    required int interval,
+    required double temperature,
+    required double windspeed,
+    required int winddirection,
+    @JsonKey(name: 'is_day') required int isDay,
+    required int weathercode,
+  }) = _CurrentWeather;
 
-  /// 풍향 (도 단위, 0-360)
-  final int windDirection;
-
-  /// 낮/밤 여부 (1: 낮, 0: 밤)
-  final int isDay;
-
-  /// WMO 기상 코드
-  final int weatherCode;
-
-  CurrentWeather({
-    required this.time,
-    required this.temperature,
-    required this.windspeed,
-    required this.windDirection,
-    required this.isDay,
-    required this.weatherCode,
-  });
-
-  factory CurrentWeather.fromJson(Map<String, dynamic> json) {
-    return CurrentWeather(
-      time: json['time'],
-      temperature: (json['temperature'] as num).toDouble(),
-      windspeed: (json['windspeed'] as num).toDouble(),
-      windDirection: json['winddirection'] as int,
-      isDay: json['is_day'] as int,
-      weatherCode: json['weathercode'] as int,
-    );
-  }
+  factory CurrentWeather.fromJson(Map<String, dynamic> json) =>
+      _$CurrentWeatherFromJson(json);
 }

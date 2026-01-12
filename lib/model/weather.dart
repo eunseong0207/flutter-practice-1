@@ -1,43 +1,27 @@
-import 'package:flutter_practice_1/model/current_weather.dart';
-import 'package:flutter_practice_1/model/weather_units.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'current_weather_units.dart';
+import 'current_weather.dart';
 
-/// 전체 기상 응답 데이터를 담는 클래스
-class Weather {
-  /// 위도 (Latitude)
-  final double latitude;
+part 'weather.freezed.dart';
+part 'weather.g.dart';
 
-  /// 경도 (Longitude)
-  final double longitude;
+@freezed
+abstract class Weather with _$Weather {
+  const factory Weather({
+    required double latitude,
+    required double longitude,
+    @JsonKey(name: 'generationtime_ms') required double generationTimeMs,
+    @JsonKey(name: 'utc_offset_seconds') required int utcOffsetSeconds, // 추가
+    required String timezone,
+    @JsonKey(name: 'timezone_abbreviation')
+    required String timezoneAbbreviation, // 추가
+    required double elevation,
+    @JsonKey(name: 'current_weather_units')
+    required CurrentWeatherUnits currentWeatherUnits, // 추가
+    @JsonKey(name: 'current_weather')
+    required CurrentWeather currentWeather, // 추가
+  }) = _Weather;
 
-  /// 생성 시간 (ms)
-  final double generationTimeMs;
-
-  /// 해발 고도
-  final double elevation;
-
-  /// 현재 기상 단위 정보
-  final WeatherUnits currentWeatherUnits;
-
-  /// 현재 기상 상세 정보
-  final CurrentWeather currentWeather;
-  Weather({
-    required this.latitude,
-    required this.longitude,
-    required this.generationTimeMs,
-    required this.elevation,
-    required this.currentWeatherUnits,
-    required this.currentWeather,
-  });
-
-  /// JSON 데이터를 기반으로 Weather 인스턴스를 생성하는 네임드 생성자
-  factory Weather.fromJson(Map<String, dynamic> json) {
-    return Weather(
-      latitude: (json['latitude'] as num).toDouble(),
-      longitude: (json['longitude'] as num).toDouble(),
-      generationTimeMs: (json['generationtime_ms'] as num).toDouble(),
-      elevation: (json['elevation'] as num).toDouble(),
-      currentWeatherUnits: WeatherUnits.fromJson(json['current_weather_units']),
-      currentWeather: CurrentWeather.fromJson(json['current_weather']),
-    );
-  }
+  factory Weather.fromJson(Map<String, dynamic> json) =>
+      _$WeatherFromJson(json);
 }
