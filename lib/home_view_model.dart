@@ -1,7 +1,7 @@
 //
 import 'dart:convert';
 
-import 'package:flutter_practice_1/weather.dart';
+import 'package:flutter_practice_1/model/weather.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 
